@@ -5,17 +5,21 @@ public abstract class AtmBase implements IAtm{
         _stock = new Cash(0, 0);
     }
     protected Cash _stock;
+    // sets the maximum allowance to be withdrawn from machine
     private int dailyLimit = 1000;
+
+    //Method for Withdrawals
     public Cash withdraw(int amount) throws AtmException {
         if(amount > dailyLimit) {
             throw new AtmException("Withdraw limit is $" + dailyLimit);
         }
         if(amount <= 0) {
-            throw new AtmException("Negative Withdraws are invalid");
+            throw new AtmException("Negative or Null Withdraws are invalid");
         }
         if(amount > _stock.getTotal()) {
             throw new AtmException("Not enough total cash in ATM");
         }
+        //Algorithm for gathering Number of Fifties and Twenties where number of Fifties is maximal
         int tempRem = amount % 50;
         int retFifties = 0;
         int retTwenties = 0;
@@ -31,6 +35,8 @@ public abstract class AtmBase implements IAtm{
             throw new AtmException("Invalid withdrawal amount: " + amount);
         }
         boolean finished = false;
+        /*While Loop that Exchanges Fifties for Twenties to in 
+         of 100 to balance the number of Notes in Machine*/
         while(!finished) {
             if(_stock.getFifties() - retFifties >= 0 && _stock.getTwenties() - retTwenties >= 0 && retFifties >= 2) {
                 if(_stock.getFifties() - retFifties < _stock.getTwenties() - retTwenties - 5){

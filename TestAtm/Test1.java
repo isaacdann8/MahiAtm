@@ -49,6 +49,8 @@ public class Test1 {
         randomWithdraws(10000, 200);
         randomWithdraws(1000 , 1000);
         randomWithdraws(1000, 300);
+
+        System.out.println("ALL TESTS PASSED / NO ERRORS");
     }
     public static void testWithdrawal(int amount, IAtm atm) throws Exception {
         System.out.println("The atm has remaining: " + atm.remainingStock());

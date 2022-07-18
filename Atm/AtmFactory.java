@@ -6,7 +6,8 @@ public class AtmFactory {
         authAtm,
         multiCurrencyAtm
     }
-
+    /* Method to create ATM. Currently only supported type is No Auth which lets anybody use it. This 
+    leaves room open for development of more features such as different currencys and authorisation */
     public static IAtm createAtm(AtmType t) {
         switch(t) {
             case noAuthAtm:
